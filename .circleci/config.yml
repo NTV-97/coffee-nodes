@@ -1,0 +1,58 @@
+version: 2.1
+
+orbs:
+  node: circleci/node@5.0.3
+
+references:
+  workspace_root: &workspace_root ~/project
+  container_config: &container_config
+    docker:
+      - image: circleci/node:16.13.0
+    working_directory: *workspace_root
+  attach_workspace: &attach_workspace
+    attach_workspace:
+      at: *workspace_root
+
+
+commands:
+  setup_to_build:
+    description: 'setup to build'
+    steps:
+      - run: node --version
+      - run: yarn --version
+      - run:
+          name: package install
+          command: |
+            yarn install
+          no_output_timeout: 20m
+jobs:
+  npm_dependencies:
+    <<: *container_config
+    steps:
+      - checkout
+      - run: node --version
+      - persist_to_workspace:
+          root: *workspace_root
+          paths:
+            - '*'
+            - '.*'
+  run:
+    <<: *container_config
+    steps:
+      - checkout
+      - setup_to_build
+      - run:
+          name: start test
+          command: |
+              yarn test
+      - run:
+          name: start service
+          command: yarn start
+
+workflows:
+  build-and-release:
+    jobs:
+      - npm_dependencies
+      - run:
+          requires:
+            - npm_dependencies
