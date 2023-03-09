@@ -20,10 +20,6 @@ const unitMerchandiseSchema = new Schema({
     description: {
         type: _const_1.SchemaTypes.String,
     },
-    stallCode: {
-        type: _const_1.SchemaTypes.String,
-        require: true,
-    },
 }, { timestamps: true });
 exports.UnitMerchandiseModel = mongoose_1.default.model('UnitMerchandise', unitMerchandiseSchema);
 //# sourceMappingURL=unitMerchandiseModel.js.map

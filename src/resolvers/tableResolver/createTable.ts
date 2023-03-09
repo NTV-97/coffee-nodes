@@ -19,7 +19,6 @@ export const createTable = async (
     tableName,
     used,
     description,
-    stallCode: context.stallCode,
   });
   await table.save();
   return {

@@ -20,13 +20,8 @@ export const getMerchandise = async (
   if (!context.userId) throw new Error('unauthorized', '401');
   if (params?.filterType?.length) {
     const merchandise: IMerchandise[] = await MerchandiseModel.find({
-      stallCode: context.stallCode,
       type: { $ne: params.filterType },
     });
     return merchandise.sort(compare);
   }
-  const merchandise: IMerchandise[] = await MerchandiseModel.find({
-    stallCode: context.stallCode,
-  });
-  return merchandise.sort(compare);
 };

@@ -11,7 +11,6 @@ export const permissionUnitMerchandise = async (
   const userInfo: IUser = await UserModel.findById(context.userId);
   const unitMerchandiseInfo: IUnitMerchandise = await UnitMerchandiseModel.findById(merchandiseId);
   if (userInfo.type === 'staff') throw new Error('forbidden', '403');
-  if (unitMerchandiseInfo.stallCode !== context.stallCode) throw new Error('forbidden', '403');
   if (!unitMerchandiseInfo._id) throw new Error('This menu do not exits', '404');
   return false;
 };

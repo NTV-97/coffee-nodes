@@ -35,10 +35,6 @@ const merchandiseSchema = new Schema({
     price: {
         type: _const_1.SchemaTypes.Number,
     },
-    stallCode: {
-        type: _const_1.SchemaTypes.String,
-        require: true,
-    },
 }, { timestamps: true });
 exports.MerchandiseModel = mongoose_1.default.model('Merchandise', merchandiseSchema);
 //# sourceMappingURL=merchandiseModel.js.map

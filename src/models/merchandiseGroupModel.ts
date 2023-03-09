@@ -7,7 +7,6 @@ export interface IMerchandiseGroup {
   merchandiseGroupCode: string;
   merchandiseGroupName: string;
   description?: string;
-  stallCode: string;
 }
 
 const merchandiseGroupSchema = new Schema<IMerchandiseGroup>(
@@ -23,10 +22,6 @@ const merchandiseGroupSchema = new Schema<IMerchandiseGroup>(
     },
     description: {
       type: SchemaTypes.String,
-    },
-    stallCode: {
-      type: SchemaTypes.String,
-      require: true,
     },
   },
   { timestamps: true },

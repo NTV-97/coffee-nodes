@@ -14,8 +14,4 @@ const compare = (a: IUnitMerchandise, b: IUnitMerchandise) => {
 
 export const getUnitMerchandise = async (_: any, _params: undefined, context: Context) => {
   if (!context.userId) throw new Error('unauthorized', '401');
-  const unitMerchandise: IUnitMerchandise[] = await UnitMerchandiseModel.find({
-    stallCode: context.stallCode,
-  });
-  return unitMerchandise.sort(compare);
 };

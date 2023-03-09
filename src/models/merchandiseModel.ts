@@ -12,7 +12,6 @@ export interface IMerchandise {
   group: string;
   type: TypeMerchandise;
   price?: number;
-  stallCode: string;
 }
 
 const merchandiseSchema = new Schema<IMerchandise>(
@@ -43,10 +42,6 @@ const merchandiseSchema = new Schema<IMerchandise>(
     },
     price: {
       type: SchemaTypes.Number,
-    },
-    stallCode: {
-      type: SchemaTypes.String,
-      require: true,
     },
   },
   { timestamps: true },

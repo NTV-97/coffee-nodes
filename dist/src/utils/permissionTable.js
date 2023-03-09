@@ -10,8 +10,6 @@ const permissionTable = async (tableId, context) => {
     const tableInfo = await _models_1.TableModel.findById(tableId);
     if (userInfo.type === 'staff')
         throw new _config_1.Error('forbidden', '403');
-    if (tableInfo.stallCode !== context.stallCode)
-        throw new _config_1.Error('forbidden', '403');
     if (!tableInfo.id)
         throw new _config_1.Error('This menu do not exits', '404');
     return false;

@@ -13,7 +13,6 @@ export const permissionMerchandiseGroup = async (
     merchandiseGroupId,
   );
   if (userInfo.type === 'staff') throw new Error('forbidden', '403');
-  if (merchandiseInfo.stallCode !== context.stallCode) throw new Error('forbidden', '403');
   if (!merchandiseInfo._id) throw new Error('This menu do not exits', '404');
   return false;
 };

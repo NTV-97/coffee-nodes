@@ -6,7 +6,7 @@ const _config_1 = require("@config");
 const getUsers = async (_, data, context) => {
     if (!context.userId)
         throw new _config_1.Error('unauthorized', '401');
-    return _models_1.UserModel.find({ adminId: context.userId });
+    return _models_1.UserModel.find();
 };
 exports.getUsers = getUsers;
 //# sourceMappingURL=getUsers.js.map

@@ -19,7 +19,6 @@ export const createOrder = async (_: any, { tableId, orderData }: IOrder, contex
     orderData: currentOrderData,
     price: currentReduceOrderData.totalPrice,
     totalPrice: currentReduceOrderData.totalPrice,
-    stallCode: context.stallCode,
     count: currentReduceOrderData.count,
   });
   await Order.save();

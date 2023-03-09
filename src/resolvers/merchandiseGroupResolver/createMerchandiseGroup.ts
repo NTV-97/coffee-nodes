@@ -20,7 +20,6 @@ export const createMerchandiseGroup = async (
     merchandiseGroupCode: merchandiseGroupCode.toUpperCase(),
     merchandiseGroupName,
     description,
-    stallCode: context.stallCode,
   });
   await merchandise.save();
   return {

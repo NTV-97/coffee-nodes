@@ -41,10 +41,6 @@ const billSchema = new Schema({
         type: _const_1.SchemaTypes.Array,
         require: true,
     },
-    stallCode: {
-        type: _const_1.SchemaTypes.String,
-        require: true,
-    },
     count: {
         type: _const_1.SchemaTypes.Number,
         require: true,

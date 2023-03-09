@@ -20,7 +20,6 @@ export const createUnitMerchandise = async (
     unitCode: unitCode.toUpperCase(),
     unitName,
     description,
-    stallCode: context.stallCode,
   });
   await merchandise.save();
   return {

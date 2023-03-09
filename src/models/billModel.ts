@@ -15,7 +15,6 @@ export interface IBill {
   unitDiscount?: 'percent' | 'value';
   orderData: OrderData[];
   count: number;
-  stallCode: string;
 }
 
 const billSchema = new Schema<IBill>(
@@ -51,10 +50,6 @@ const billSchema = new Schema<IBill>(
     },
     orderData: {
       type: SchemaTypes.Array,
-      require: true,
-    },
-    stallCode: {
-      type: SchemaTypes.String,
       require: true,
     },
     count: {

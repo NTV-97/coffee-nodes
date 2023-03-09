@@ -16,8 +16,6 @@ const compare = (a, b) => {
 const getTables = async (_, _params, context) => {
     if (!context.userId)
         throw new _config_1.Error('unauthorized', '401');
-    const table = await _models_1.TableModel.find({ stallCode: context.stallCode });
-    return table.sort(compare);
 };
 exports.getTables = getTables;
 const getTable = async (_, { id }, context) => {

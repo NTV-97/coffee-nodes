@@ -23,7 +23,6 @@ const createMerchandise = async (_, { merchandiseCode, merchandiseName, descript
         type,
         unit,
         price: price ? price : 0,
-        stallCode: context.stallCode,
     });
     await merchandise.save();
     return {

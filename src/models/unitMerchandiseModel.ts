@@ -7,7 +7,6 @@ export interface IUnitMerchandise {
   unitCode: string;
   unitName: string;
   description?: string;
-  stallCode: string;
 }
 
 const unitMerchandiseSchema = new Schema<IUnitMerchandise>(
@@ -23,10 +22,6 @@ const unitMerchandiseSchema = new Schema<IUnitMerchandise>(
     },
     description: {
       type: SchemaTypes.String,
-    },
-    stallCode: {
-      type: SchemaTypes.String,
-      require: true,
     },
   },
   { timestamps: true },

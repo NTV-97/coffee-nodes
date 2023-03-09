@@ -24,10 +24,6 @@ const areaSchema = new Schema({
         type: _const_1.SchemaTypes.Boolean,
         require: true,
     },
-    stallCode: {
-        type: _const_1.SchemaTypes.Boolean,
-        require: true,
-    },
 }, { timestamps: true });
 exports.AreaModel = mongoose_1.default.model('Area', areaSchema);
 //# sourceMappingURL=areaModel.js.map

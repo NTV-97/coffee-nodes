@@ -10,8 +10,6 @@ const permissionUnitMerchandise = async (merchandiseId, context) => {
     const unitMerchandiseInfo = await _models_1.UnitMerchandiseModel.findById(merchandiseId);
     if (userInfo.type === 'staff')
         throw new _config_1.Error('forbidden', '403');
-    if (unitMerchandiseInfo.stallCode !== context.stallCode)
-        throw new _config_1.Error('forbidden', '403');
     if (!unitMerchandiseInfo._id)
         throw new _config_1.Error('This menu do not exits', '404');
     return false;

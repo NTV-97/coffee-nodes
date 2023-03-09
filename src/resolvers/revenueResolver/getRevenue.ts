@@ -15,7 +15,6 @@ export const getRevenue = async (
   const limit = params.limit;
   if (!!params?.startDate) {
     const bills: IBill[] = await BillModel.find({
-      stallCode: context.stallCode,
       paymentAt: {
         $gte: new Date(new Date(params.startDate).setHours(0, 0, 0)),
         $lt: new Date(new Date(params?.endDate || params.startDate).setHours(23, 59, 59)),
@@ -26,10 +25,4 @@ export const getRevenue = async (
 
     return bills;
   }
-  const bills: IBill[] = await BillModel.find({
-    stallCode: context.stallCode,
-  })
-    .limit(limit)
-    .skip(limit * offset);
-  return bills;
 };

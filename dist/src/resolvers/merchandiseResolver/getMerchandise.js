@@ -17,15 +17,10 @@ const getMerchandise = async (_, params, context) => {
         throw new _config_1.Error('unauthorized', '401');
     if (params?.filterType?.length) {
         const merchandise = await _models_1.MerchandiseModel.find({
-            stallCode: context.stallCode,
             type: { $ne: params.filterType },
         });
         return merchandise.sort(compare);
     }
-    const merchandise = await _models_1.MerchandiseModel.find({
-        stallCode: context.stallCode,
-    });
-    return merchandise.sort(compare);
 };
 exports.getMerchandise = getMerchandise;
 //# sourceMappingURL=getMerchandise.js.map

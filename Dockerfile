@@ -1,14 +1,18 @@
-FROM risingstack/alpine:3.4-v6.9.4-4.2.0
+FROM node:16-alpine
 
-ENV PORT 3000
+WORKDIR ./nodejs
+
+COPY *.json ./
+
+COPY . .
+
+
+RUN npm install
+
+RUN npm rebuild bcrypt
+
+ENV NODE_ENV=production
 
 EXPOSE 3000
 
-COPY package.json package.json
-RUN yarn
-
-COPY . .
-RUN yarn build
-RUN yarn start
-
-CMD ["node", "dist/"]
+CMD ["npm", "start"]

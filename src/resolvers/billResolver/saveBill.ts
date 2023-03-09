@@ -32,7 +32,6 @@ export const saveBill = async (
     unitDiscount,
     orderData,
     count,
-    stallCode: context.stallCode,
   });
   await Bill.save();
   return {

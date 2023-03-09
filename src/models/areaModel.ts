@@ -7,7 +7,6 @@ export interface IArea {
   areaName: string;
   description?: string;
   used: boolean;
-  stallCode: string;
 }
 
 const areaSchema = new Schema<IArea>(
@@ -25,10 +24,6 @@ const areaSchema = new Schema<IArea>(
       type: SchemaTypes.String,
     },
     used: {
-      type: SchemaTypes.Boolean,
-      require: true,
-    },
-    stallCode: {
       type: SchemaTypes.Boolean,
       require: true,
     },

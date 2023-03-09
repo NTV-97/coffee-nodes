@@ -19,7 +19,6 @@ const createMerchandiseGroup = async (_, { merchandiseGroupCode, merchandiseGrou
         merchandiseGroupCode: merchandiseGroupCode.toUpperCase(),
         merchandiseGroupName,
         description,
-        stallCode: context.stallCode,
     });
     await merchandise.save();
     return {

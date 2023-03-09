@@ -8,7 +8,6 @@ export const permissionTable = async (tableId: Types.ObjectId, context: Context)
   const userInfo: IUser = await UserModel.findById(context.userId);
   const tableInfo: ITable = await TableModel.findById(tableId);
   if (userInfo.type === 'staff') throw new Error('forbidden', '403');
-  if (tableInfo.stallCode !== context.stallCode) throw new Error('forbidden', '403');
   if (!tableInfo.id) throw new Error('This menu do not exits', '404');
   return false;
 };

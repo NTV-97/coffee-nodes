@@ -20,10 +20,6 @@ const merchandiseGroupSchema = new Schema({
     description: {
         type: _const_1.SchemaTypes.String,
     },
-    stallCode: {
-        type: _const_1.SchemaTypes.String,
-        require: true,
-    },
 }, { timestamps: true });
 exports.MerchandiseGroupModel = mongoose_1.default.model('MerchandiseGroup', merchandiseGroupSchema);
 //# sourceMappingURL=merchandiseGroupModel.js.map

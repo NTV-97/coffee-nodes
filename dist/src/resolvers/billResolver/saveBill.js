@@ -20,7 +20,6 @@ const saveBill = async (_, { createdOrderAt, tableId, paymentAt, price, totalPri
         unitDiscount,
         orderData,
         count,
-        stallCode: context.stallCode,
     });
     await Bill.save();
     return {

@@ -22,7 +22,6 @@ export interface IOrder {
   unitDiscount?: 'percent' | 'value';
   orderData: OrderData[];
   count: number;
-  stallCode: string;
 }
 
 const orderSchema = new Schema<IOrder>(
@@ -53,10 +52,6 @@ const orderSchema = new Schema<IOrder>(
     },
     orderData: {
       type: SchemaTypes.Array,
-      require: true,
-    },
-    stallCode: {
-      type: SchemaTypes.String,
       require: true,
     },
     count: {

@@ -8,7 +8,6 @@ export interface ITable {
   tableName: string;
   description?: string;
   used: boolean;
-  stallCode: string;
 }
 
 const tableSchema = new Schema<ITable>(
@@ -27,10 +26,6 @@ const tableSchema = new Schema<ITable>(
     },
     used: {
       type: SchemaTypes.Boolean,
-      require: true,
-    },
-    stallCode: {
-      type: SchemaTypes.String,
       require: true,
     },
   },

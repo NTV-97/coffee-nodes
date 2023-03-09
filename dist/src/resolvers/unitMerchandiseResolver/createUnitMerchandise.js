@@ -19,7 +19,6 @@ const createUnitMerchandise = async (_, { unitCode, unitName, description }, con
         unitCode: unitCode.toUpperCase(),
         unitName,
         description,
-        stallCode: context.stallCode,
     });
     await merchandise.save();
     return {

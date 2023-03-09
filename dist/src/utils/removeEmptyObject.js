@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.removeEmptyObject = void 0;
 const removeEmptyObject = (object) => {
     const newObj = {};
+    //@ts-ignore
     Object.keys(object).forEach((key) => {
         //@ts-ignore
         if (object[key] === Object(object[key]))

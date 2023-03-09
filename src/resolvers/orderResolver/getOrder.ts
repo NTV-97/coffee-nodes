@@ -16,22 +16,6 @@ const compare = (a: OrderData, b: OrderData) => {
 
 export const getOrders = async (_: any, _params: undefined, context: Context) => {
   if (!context.userId) throw new Error('unauthorized', '401');
-  const order: IOrder[] = await OrderModel.find({ stallCode: context.stallCode });
-
-  return order.map((element) => {
-    return {
-      id: element.id,
-      createdAt: element.createdAt,
-      tableId: element.tableId,
-      price: element.price,
-      totalPrice: element.totalPrice,
-      discount: element.discount,
-      priceDiscount: element.priceDiscount,
-      unitDiscount: element.unitDiscount,
-      orderData: element.orderData.sort(compare),
-      count: element.count,
-    };
-  });
 };
 
 export const getOrder = async (_: any, { id }: { id: Types.ObjectId }, context: Context) => {

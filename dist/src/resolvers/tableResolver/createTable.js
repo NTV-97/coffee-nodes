@@ -18,7 +18,6 @@ const createTable = async (_, { tableCode, tableName, used, description }, conte
         tableName,
         used,
         description,
-        stallCode: context.stallCode,
     });
     await table.save();
     return {

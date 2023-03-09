@@ -24,10 +24,6 @@ const tableSchema = new Schema({
         type: _const_1.SchemaTypes.Boolean,
         require: true,
     },
-    stallCode: {
-        type: _const_1.SchemaTypes.String,
-        require: true,
-    },
 }, { timestamps: true });
 exports.TableModel = mongoose_1.default.model('Table', tableSchema);
 //# sourceMappingURL=tableModel.js.map
