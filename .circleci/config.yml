@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  node: circleci/node@5.0.3
+  node: circleci/node@5.1.0
 
 references:
   workspace_root: &workspace_root ~/project
@@ -9,10 +9,6 @@ references:
     docker:
       - image: circleci/node:16.13.0
     working_directory: *workspace_root
-  attach_workspace: &attach_workspace
-    attach_workspace:
-      at: *workspace_root
-
 
 commands:
   setup_to_build:
@@ -31,11 +27,6 @@ jobs:
     steps:
       - checkout
       - run: node --version
-      - persist_to_workspace:
-          root: *workspace_root
-          paths:
-            - '*'
-            - '.*'
   run:
     <<: *container_config
     steps:
