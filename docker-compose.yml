@@ -4,7 +4,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: nodejs-be:latest
+    image: nodejs:latest
     container_name: nodejs
     restart: always
     ports:
