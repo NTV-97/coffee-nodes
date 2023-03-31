@@ -19,7 +19,7 @@ const _config_1 = require("@config");
 dotenv_1.default.config();
 if (!process.env.PORT) {
     console.log(`Error to get ports`);
-    process.exit(1);
+    process.exit(-1);
 }
 const PORT = parseInt(process.env.PORT, 10);
 const HOST = process.env.HOST || '3000';

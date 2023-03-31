@@ -18,7 +18,7 @@ import { connect, formatError } from '@config';
 dotenv.config();
 if (!process.env.PORT) {
   console.log(`Error to get ports`);
-  process.exit(1);
+  process.exit(-1);
 }
 const PORT: number = parseInt(process.env.PORT as string, 10);
 const HOST: string = process.env.HOST || '3000';

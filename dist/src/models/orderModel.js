@@ -1,45 +1,17 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.OrderModel = void 0;
-const mongoose_1 = __importDefault(require("mongoose"));
-const Schema = mongoose_1.default.Schema;
-const _const_1 = require("@const");
-const orderSchema = new Schema({
-    tableId: {
-        type: _const_1.SchemaTypes.ObjectId,
-        require: true,
-    },
-    paymentAt: {
-        type: _const_1.SchemaTypes.Date,
-    },
-    price: {
-        type: _const_1.SchemaTypes.Number,
-        require: true,
-    },
-    totalPrice: {
-        type: _const_1.SchemaTypes.Number,
-        require: true,
-    },
-    discount: {
-        type: _const_1.SchemaTypes.Number,
-    },
-    priceDiscount: {
-        type: _const_1.SchemaTypes.Number,
-    },
-    unitDiscount: {
-        type: _const_1.SchemaTypes.String,
-    },
-    orderData: {
-        type: _const_1.SchemaTypes.Array,
-        require: true,
-    },
-    count: {
-        type: _const_1.SchemaTypes.Number,
-        require: true,
-    },
+const mongoose_1 = require("mongoose");
+const orderItemSchema = new mongoose_1.Schema({
+    product: { type: mongoose_1.Schema.Types.ObjectId, ref: 'Product', required: true },
+    quantity: { type: Number, required: true },
+    price: { type: Number, required: true },
+});
+const orderSchema = new mongoose_1.Schema({
+    user: { type: mongoose_1.Schema.Types.ObjectId, ref: 'User', required: true },
+    cart: { type: mongoose_1.Schema.Types.ObjectId, ref: 'Cart', required: true },
+    items: [orderItemSchema],
+    totalPrice: { type: Number, required: true },
 }, { timestamps: true });
-exports.OrderModel = mongoose_1.default.model('Order', orderSchema);
+exports.OrderModel = (0, mongoose_1.model)('Order', orderSchema);
 //# sourceMappingURL=orderModel.js.map

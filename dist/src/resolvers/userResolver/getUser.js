@@ -7,7 +7,7 @@ const getUser = async (_, { id }, context) => {
     if (!context.userId)
         throw new _config_1.Error('unauthorized', '401');
     const user = await _models_1.UserModel.findById(id);
-    if (user.adminId != context.userId) {
+    if (user?.id != context.userId) {
         throw new _config_1.Error('forbidden', '403');
     }
     return user;

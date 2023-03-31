@@ -10,9 +10,11 @@ export const login = async (_: any, { email, password, phoneNumber }: IUser) => 
       token: null,
     };
   }
-  // const userPayload = { email, phoneNumber };
   const userPayload = email?.length ? { email } : { phoneNumber };
-  const user: IUser = await UserModel.findOne(userPayload);
+
+  const user: IUser | null = await UserModel.findOne({
+    $or: [{ email }, { phoneNumber }],
+  });
   if (!user) {
     return {
       message: `Unknown user: ${JSON.stringify(userPayload)}`,

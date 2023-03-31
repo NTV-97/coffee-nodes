@@ -9,7 +9,7 @@ const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
 if (!process.env.URI_MONGO) {
     console.log(`Error to get MONGO URL`);
-    process.exit(1);
+    process.exit(-1);
 }
 const URI_MONGO = process.env.URI_MONGO;
 let database;
@@ -28,8 +28,9 @@ const connect = () => {
     });
     database = mongoose_1.default.connection;
     database.once('open', databaseConnect);
-    database.on('error', () => {
-        console.log('Error connecting to database');
+    database.on('error', (err) => {
+        console.log(`Error connecting to database: ${err}`);
+        process.exit(-1);
     });
 };
 exports.connect = connect;

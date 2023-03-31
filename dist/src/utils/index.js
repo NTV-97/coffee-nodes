@@ -14,14 +14,6 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
     for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-__exportStar(require("./permissionMenu"), exports);
 __exportStar(require("./removeEmptyObject"), exports);
-__exportStar(require("./permissionUser"), exports);
-__exportStar(require("./checkUserType"), exports);
-__exportStar(require("./permissionTable"), exports);
-__exportStar(require("./permissionMerchandiseGroup"), exports);
-__exportStar(require("./permissionMerchandise"), exports);
-__exportStar(require("./permissionUnitMerchandise"), exports);
-__exportStar(require("./permissionOrder"), exports);
-__exportStar(require("./reduceOrderData"), exports);
+__exportStar(require("./arraysEqual"), exports);
 //# sourceMappingURL=index.js.map
