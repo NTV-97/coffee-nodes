@@ -15,7 +15,7 @@ exports.userSchema = (0, apollo_server_express_1.gql) `
     success: Boolean!
   }
   extend type Query {
-    getUser(id: ID!): User!
+    getUser: User!
     getUsers: [User!]
   }
   extend type Mutation {

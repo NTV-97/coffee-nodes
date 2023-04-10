@@ -1,12 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getCart = void 0;
+exports.getOrders = void 0;
 const _models_1 = require("@models");
 const _config_1 = require("@config");
-const getCart = async (_, __, context) => {
+const getOrders = async (_, __, context) => {
     if (!context.userId)
         throw new _config_1.Error('unauthorized', '401');
-    let cart = await _models_1.CartModel.findOne({ user: context.userId })
+    const order = await _models_1.OrderModel.find({ user: context.userId })
         .populate({
         path: 'items.product',
         populate: {
@@ -14,10 +14,7 @@ const getCart = async (_, __, context) => {
         },
     })
         .populate('user');
-    if (!cart) {
-        cart = await _models_1.CartModel.create({ user: context.userId });
-    }
-    return cart;
+    return order;
 };
-exports.getCart = getCart;
-//# sourceMappingURL=getCart.js.map
+exports.getOrders = getOrders;
+//# sourceMappingURL=getOrders.js.map

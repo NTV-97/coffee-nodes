@@ -6,7 +6,14 @@ const _config_1 = require("@config");
 const clearCart = async (_, __, context) => {
     if (!context.userId)
         throw new _config_1.Error('unauthorized', '401');
-    const cart = await _models_1.CartModel.findOne({ user: context.userId });
+    const cart = await _models_1.CartModel.findOne({ user: context.userId })
+        .populate({
+        path: 'items.product',
+        populate: {
+            path: 'category',
+        },
+    })
+        .populate('user');
     if (!cart) {
         throw new _config_1.Error('Cart not found', '404');
     }

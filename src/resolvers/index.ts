@@ -3,6 +3,7 @@ import { authResolvers } from './authResolver';
 import { categoryResolvers } from './categoryResolver';
 import { productResolvers } from './productResolver';
 import { cartResolvers } from './cartResolver';
+import { orderResolvers } from './orderResolver';
 import _ from 'lodash';
 import { GraphQLScalarType, Kind } from 'graphql';
 
@@ -43,6 +44,7 @@ export const resolvers = _.merge(
   categoryResolvers,
   productResolvers,
   cartResolvers,
+  orderResolvers,
   { Date: dateScalar },
   // { TypeUser: typeUserScalar },
 );

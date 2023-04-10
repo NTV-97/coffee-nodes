@@ -9,6 +9,7 @@ const authResolver_1 = require("./authResolver");
 const categoryResolver_1 = require("./categoryResolver");
 const productResolver_1 = require("./productResolver");
 const cartResolver_1 = require("./cartResolver");
+const orderResolver_1 = require("./orderResolver");
 const lodash_1 = __importDefault(require("lodash"));
 const graphql_1 = require("graphql");
 // const typeUserScalar = new GraphQLScalarType({
@@ -39,5 +40,5 @@ const dateScalar = new graphql_1.GraphQLScalarType({
         return null; // Invalid hard-coded value (not an integer)
     },
 });
-exports.resolvers = lodash_1.default.merge({}, userResolver_1.userResolvers, authResolver_1.authResolvers, categoryResolver_1.categoryResolvers, productResolver_1.productResolvers, cartResolver_1.cartResolvers, { Date: dateScalar });
+exports.resolvers = lodash_1.default.merge({}, userResolver_1.userResolvers, authResolver_1.authResolvers, categoryResolver_1.categoryResolvers, productResolver_1.productResolvers, cartResolver_1.cartResolvers, orderResolver_1.orderResolvers, { Date: dateScalar });
 //# sourceMappingURL=index.js.map

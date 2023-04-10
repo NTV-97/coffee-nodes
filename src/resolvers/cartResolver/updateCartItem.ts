@@ -14,7 +14,12 @@ export const updateCartItem = async (
 ) => {
   if (!context.userId) throw new Error('unauthorized', '401');
   const cart = await CartModel.findOne({ user: context.userId })
-    .populate('items.product')
+    .populate({
+      path: 'items.product',
+      populate: {
+        path: 'category',
+      },
+    })
     .populate('user');
   if (cart) {
     for (let index = 0; index < itemsUpdate.length; index++) {
@@ -29,7 +34,7 @@ export const updateCartItem = async (
     }
 
     //@ts-ignore
-    cart.totalPrice = cart.items.reduce((pre, current) => pre.price + current.price);
+    cart.totalPrice = cart.items.reduce((pre, current) => pre.price + current.price).price;
     await cart.save();
   }
 

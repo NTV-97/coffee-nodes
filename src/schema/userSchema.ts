@@ -13,7 +13,7 @@ export const userSchema = gql`
     success: Boolean!
   }
   extend type Query {
-    getUser(id: ID!): User!
+    getUser: User!
     getUsers: [User!]
   }
   extend type Mutation {

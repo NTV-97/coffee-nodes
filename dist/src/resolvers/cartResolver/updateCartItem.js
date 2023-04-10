@@ -8,7 +8,12 @@ const updateCartItem = async (_, { itemsUpdate }, context) => {
     if (!context.userId)
         throw new _config_1.Error('unauthorized', '401');
     const cart = await _models_1.CartModel.findOne({ user: context.userId })
-        .populate('items.product')
+        .populate({
+        path: 'items.product',
+        populate: {
+            path: 'category',
+        },
+    })
         .populate('user');
     if (cart) {
         for (let index = 0; index < itemsUpdate.length; index++) {
@@ -23,7 +28,7 @@ const updateCartItem = async (_, { itemsUpdate }, context) => {
             cart.items[cartItemIndex].toppings = toppings;
         }
         //@ts-ignore
-        cart.totalPrice = cart.items.reduce((pre, current) => pre.price + current.price);
+        cart.totalPrice = cart.items.reduce((pre, current) => pre.price + current.price).price;
         await cart.save();
     }
     return cart;

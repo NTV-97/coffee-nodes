@@ -3,10 +3,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.getUser = void 0;
 const _models_1 = require("@models");
 const _config_1 = require("@config");
-const getUser = async (_, { id }, context) => {
+const getUser = async (_, __, context) => {
     if (!context.userId)
         throw new _config_1.Error('unauthorized', '401');
-    const user = await _models_1.UserModel.findById(id);
+    const user = await _models_1.UserModel.findById(context.userId);
     if (user?.id != context.userId) {
         throw new _config_1.Error('forbidden', '403');
     }
