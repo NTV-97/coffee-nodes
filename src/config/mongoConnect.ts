@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 if (!process.env.URI_MONGO) {
   console.log(`Error to get MONGO URL`);
-  process.exit(1);
+  process.exit(-1);
 }
 const URI_MONGO: string = process.env.URI_MONGO;
 
@@ -26,8 +26,9 @@ export const connect = () => {
 
   database = mongoose.connection;
   database.once('open', databaseConnect);
-  database.on('error', () => {
-    console.log('Error connecting to database');
+  database.on('error', (err) => {
+    console.log(`Error connecting to database: ${err}`);
+    process.exit(-1);
   });
 };
 export const disconnect = () => {

@@ -1,17 +1,18 @@
-import { createOrder } from './createOrder';
-import { deleteOrder } from './deleteOrder';
-import { editOrder } from './editOrder';
-import { getOrders, getOrder } from './getOrder';
+import { cancelOrder } from './cancelOrder';
+import { getOrder } from './getOrder';
+import { getOrders } from './getOrders';
+import { placeOrder } from './placeOrder';
+import { updateOrderStatus } from './updateOrderStatus';
 
 export const orderResolvers = {
   Query: {
-    getOrders,
     getOrder,
+    getOrders,
   },
 
   Mutation: {
-    createOrder,
-    editOrder,
-    deleteOrder,
+    cancelOrder,
+    placeOrder,
+    updateOrderStatus,
   },
 };

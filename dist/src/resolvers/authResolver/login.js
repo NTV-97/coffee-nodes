@@ -12,9 +12,10 @@ const login = async (_, { email, password, phoneNumber }) => {
             token: null,
         };
     }
-    // const userPayload = { email, phoneNumber };
     const userPayload = email?.length ? { email } : { phoneNumber };
-    const user = await _models_1.UserModel.findOne(userPayload);
+    const user = await _models_1.UserModel.findOne({
+        $or: [{ email }, { phoneNumber }],
+    });
     if (!user) {
         return {
             message: `Unknown user: ${JSON.stringify(userPayload)}`,

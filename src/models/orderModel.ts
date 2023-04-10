@@ -1,65 +1,46 @@
-import mongoose, { Types } from 'mongoose';
-const Schema = mongoose.Schema;
-import { SchemaTypes } from '@const';
+import { Model, Document, Types, Schema, model } from 'mongoose';
+import { IProduct } from './productModel';
+import { IUser } from './userModel';
 
-export type OrderData = {
-  id: Types.ObjectId;
-  count: number;
+export type OrderItemType = {
+  product: IProduct | Types.ObjectId;
+  quantity: number;
+  size: string;
+  toppings: [string];
   price: number;
-  name: string;
-  unit: string;
-  totalPrice: number;
 };
 
-export interface IOrder {
+export interface IOrder extends Document {
   id: Types.ObjectId;
-  createdAt: Date;
-  tableId: Types.ObjectId;
-  price: number;
+  user: Types.ObjectId | IUser;
+  items: OrderItemType[];
   totalPrice: number;
-  discount?: number;
-  priceDiscount?: number;
-  unitDiscount?: 'percent' | 'value';
-  orderData: OrderData[];
-  count: number;
+  status: string;
+  note: string;
+  createdAt: Date;
+  updatedAt: Date;
 }
+
+const orderItemSchema = new Schema<OrderItemType>(
+  {
+    product: { type: Schema.Types.ObjectId, ref: 'Product', required: true },
+    quantity: { type: Number, required: true },
+    size: { type: String, required: true },
+    toppings: [{ type: String }],
+    price: { type: Number, required: true },
+  },
+  { _id: false },
+);
 
 const orderSchema = new Schema<IOrder>(
   {
-    tableId: {
-      type: SchemaTypes.ObjectId,
-      require: true,
-    },
-    paymentAt: {
-      type: SchemaTypes.Date,
-    },
-    price: {
-      type: SchemaTypes.Number,
-      require: true,
-    },
-    totalPrice: {
-      type: SchemaTypes.Number,
-      require: true,
-    },
-    discount: {
-      type: SchemaTypes.Number,
-    },
-    priceDiscount: {
-      type: SchemaTypes.Number,
-    },
-    unitDiscount: {
-      type: SchemaTypes.String,
-    },
-    orderData: {
-      type: SchemaTypes.Array,
-      require: true,
-    },
-    count: {
-      type: SchemaTypes.Number,
-      require: true,
-    },
+    user: { type: Schema.Types.ObjectId, ref: 'User', required: true },
+    items: [orderItemSchema],
+    totalPrice: { type: Number, required: true },
+    status: { type: String },
+    note: { type: String },
   },
   { timestamps: true },
 );
 
-export const OrderModel = mongoose.model('Order', orderSchema);
+export const OrderModel: Model<IOrder> = model('Order', orderSchema);

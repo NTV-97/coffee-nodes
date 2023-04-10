@@ -4,53 +4,39 @@ exports.orderSchema = void 0;
 const apollo_server_express_1 = require("apollo-server-express");
 exports.orderSchema = (0, apollo_server_express_1.gql) `
   scalar Date
-  scalar TypeUnitDiscount
-  type OderData {
-    id: ID!
-    count: Float!
+  enum OrderStatus {
+    PENDING
+    PROCESSING
+    COMPLETED
+    CANCELLED
+  }
+  type OrderItem {
+    product: Product
+    quantity: Int!
+    size: String!
+    toppings: [String]
     price: Float!
-    name: String!
-    unit: String!
-    totalPrice: Float!
   }
   type Order {
     id: ID!
-    createdAt: Date!
-    tableId: ID!
-    price: Float!
+    user: User!
+    items: [OrderItem!]!
     totalPrice: Float!
-    discount: Float
-    priceDiscount: Int
-    unitDiscount: TypeUnitDiscount
-    orderData: [OderData]
-    count: Float!
-  }
-  input OrderDataInput {
-    id: ID!
-    count: Float
-    price: Float
-    name: String
-    unit: String
-    totalPrice: Float
+    status: OrderStatus!
+    note: String!
+    createdAt: Date
+    updatedAt: Date
   }
 
   extend type Query {
-    getOrders: [Order]!
-    getOrder(id: ID!): Order!
+    getOrders: [Order!]!
+    getOrder(id: ID!): Order
   }
+
   extend type Mutation {
-    createOrder(tableId: ID!, orderData: [OrderDataInput!]): Success!
-    editOrder(
-      id: ID!
-      tableId: ID
-      price: Float
-      totalPrice: Float
-      discount: Float
-      priceDiscount: Int
-      unitDiscount: TypeUnitDiscount
-      orderData: [OrderDataInput]
-    ): Order!
-    deleteOrder(id: ID!): Success!
+    placeOrder(idCart: ID!, note: String): Order
+    updateOrderStatus(id: ID!, status: OrderStatus!): Order
+    cancelOrder(id: ID!): Order
   }
 `;
 //# sourceMappingURL=orderSchema.js.map

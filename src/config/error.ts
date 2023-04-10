@@ -35,7 +35,13 @@ export const formatError = (error: ApolloError) => {
       code: error.extensions.code,
       message: error.message,
       path: error.path,
-      any: error.extensions,
+    };
+  }
+  if (error.extensions.code === '400') {
+    return {
+      code: '400',
+      message: error.message,
+      path: error.path,
     };
   }
   return error;

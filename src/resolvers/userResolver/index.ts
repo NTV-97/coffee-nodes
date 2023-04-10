@@ -1,4 +1,3 @@
-import { createUser } from './createUser';
 import { deleteUser } from './deleteUser';
 import { editUser } from './editUser';
 import { getUser } from './getUser';
@@ -11,7 +10,6 @@ export const userResolvers = {
   },
 
   Mutation: {
-    createUser,
     editUser,
     deleteUser,
   },

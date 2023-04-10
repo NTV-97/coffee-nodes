@@ -1,19 +1,20 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.orderResolvers = void 0;
-const createOrder_1 = require("./createOrder");
-const deleteOrder_1 = require("./deleteOrder");
-const editOrder_1 = require("./editOrder");
+const cancelOrder_1 = require("./cancelOrder");
 const getOrder_1 = require("./getOrder");
+const getOrders_1 = require("./getOrders");
+const placeOrder_1 = require("./placeOrder");
+const updateOrderStatus_1 = require("./updateOrderStatus");
 exports.orderResolvers = {
     Query: {
-        getOrders: getOrder_1.getOrders,
         getOrder: getOrder_1.getOrder,
+        getOrders: getOrders_1.getOrders,
     },
     Mutation: {
-        createOrder: createOrder_1.createOrder,
-        editOrder: editOrder_1.editOrder,
-        deleteOrder: deleteOrder_1.deleteOrder,
+        cancelOrder: cancelOrder_1.cancelOrder,
+        placeOrder: placeOrder_1.placeOrder,
+        updateOrderStatus: updateOrderStatus_1.updateOrderStatus,
     },
 };
 //# sourceMappingURL=index.js.map
