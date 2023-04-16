@@ -16,6 +16,10 @@ export const categorySchema: DocumentNode = gql`
     image: String
     description: String
   }
+  type Success {
+    message: String!
+    success: Boolean!
+  }
   extend type Query {
     getCategory(id: ID!): Category
     getCategories: [Category!]!
@@ -23,6 +27,6 @@ export const categorySchema: DocumentNode = gql`
   extend type Mutation {
     createCategory(category: CategoryInput!): Category!
     updateCategory(id: ID!, category: CategoryInput!): Category!
-    deleteCategory(id: ID!): Category!
+    deleteCategory(id: ID!): Success!
   }
 `;

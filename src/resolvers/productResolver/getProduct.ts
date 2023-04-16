@@ -7,7 +7,6 @@ export const getProduct = async (_: any, { id }: { id: Types.ObjectId }, context
   if (!context.userId) throw new Error('unauthorized', '401');
 
   const product: IProduct | null = await ProductModel.findById(id).populate('category');
-
   if (!product) throw new Error('Product not found', '404');
 
   return product;

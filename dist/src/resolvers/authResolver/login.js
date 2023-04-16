@@ -33,7 +33,7 @@ const login = async (_, { email, password, phoneNumber }) => {
         message: 'success',
         token: _services_1.Auth.generateJwt({
             userId: user.id,
-            email: user.email,
+            role: user.role,
         }),
     };
 };

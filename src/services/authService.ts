@@ -7,7 +7,7 @@ import { Types } from 'mongoose';
 dotenv.config();
 
 type ParamsGenerateJwt = {
-  email: string;
+  role: 'ADMIN' | 'USER';
   userId: Types.ObjectId;
 };
 
@@ -24,8 +24,8 @@ export class Auth {
     return bcrypt.compare(requestPwd, userPwd);
   }
 
-  static generateJwt({ email, userId }: ParamsGenerateJwt) {
-    return jwt.sign({ userId, email }, SECRET_KEY, {
+  static generateJwt({ role, userId }: ParamsGenerateJwt) {
+    return jwt.sign({ userId, role }, SECRET_KEY, {
       expiresIn: '1 days',
     });
   }
@@ -43,8 +43,8 @@ export class Auth {
           return null;
         }
         //@ts-ignore
-        const { userId } = this.getJwtPayload(token);
-        return userId;
+        const { userId, role } = this.getJwtPayload(token);
+        return { userId, role };
       }
     }
 

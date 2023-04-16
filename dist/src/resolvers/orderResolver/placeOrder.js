@@ -18,7 +18,7 @@ const placeOrder = async (_, { idCart, note }, context) => {
         user: cart?.user,
         items: cart?.items,
         totalPrice: cart?.totalPrice,
-        status: 'PROCESSING',
+        status: _models_1.OrderStatus.PENDING,
         note,
     };
     const newOrder = new _models_1.OrderModel(order);

@@ -1,6 +1,11 @@
 import mongoose, { Document, Model } from 'mongoose';
 const Schema = mongoose.Schema;
 
+export enum UserRoleEnum {
+  ADMIN = 'ADMIN',
+  USER = 'USER',
+}
+
 export interface IUser extends Document {
   id: mongoose.Types.ObjectId;
   email: string;
@@ -8,6 +13,7 @@ export interface IUser extends Document {
   phoneNumber: string;
   name?: string;
   address?: string;
+  role: UserRoleEnum;
 }
 
 const userSchema = new Schema<IUser>(
@@ -28,6 +34,10 @@ const userSchema = new Schema<IUser>(
     },
     address: { type: String },
     name: { type: String },
+    role: {
+      type: String,
+      require: true,
+    },
   },
   { timestamps: true },
 );

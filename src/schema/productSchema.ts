@@ -45,6 +45,10 @@ export const productSchema = gql`
     price: Float!
     image: String
   }
+  type Success {
+    message: String!
+    success: Boolean!
+  }
   extend type Query {
     getProduct(id: ID!): Product
     getProducts: [Product]
@@ -52,6 +56,6 @@ export const productSchema = gql`
   extend type Mutation {
     createProduct(product: ProductInput!): Product!
     updateProduct(id: ID!, product: ProductInput!): Product!
-    deleteProduct(id: ID!): Product
+    deleteProduct(id: ID!): Success!
   }
 `;

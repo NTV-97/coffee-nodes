@@ -45,7 +45,8 @@ const apolloServer = new ApolloServer({
     return {
       req,
       res,
-      userId: req ? Auth.getUserId(req) : null,
+      userId: req ? Auth.getUserId(req)?.userId : null,
+      role: req ? Auth.getUserId(req)?.role : null,
     };
   },
   plugins: [

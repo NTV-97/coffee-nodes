@@ -1,15 +1,15 @@
-import { OrderModel } from '@models';
+import { OrderModel, OrderStatus, UserRoleEnum } from '@models';
 import { Context } from '@types';
 import { Error } from '@config';
 import { Types } from 'mongoose';
 
-type StatusType = 'PENDING' | 'PROCESSING' | 'COMPLETED' | 'CANCELLED';
 export const updateOrderStatus = async (
   _: any,
-  { id, status }: { id: Types.ObjectId; status: StatusType },
+  { id, status }: { id: Types.ObjectId; status: OrderStatus },
   context: Context,
 ) => {
   if (!context.userId) throw new Error('unauthorized', '401');
+  if (context.role !== UserRoleEnum.ADMIN) throw new Error("use don't have permission", '400');
 
   const order = await OrderModel.findById(id)
     .populate({

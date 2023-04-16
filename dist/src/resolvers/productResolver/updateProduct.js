@@ -3,16 +3,22 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.updateProduct = void 0;
 const _models_1 = require("@models");
 const _config_1 = require("@config");
-const _utils_1 = require("@utils");
 const updateProduct = async (_, { id, product }, context) => {
     if (!context.userId)
         throw new _config_1.Error('unauthorized', '401');
-    const data = (0, _utils_1.removeEmptyObject)(product);
-    const response = await _models_1.ProductModel.findByIdAndUpdate(id, data, { upsert: true }, (err) => {
-        if (err)
-            throw new _config_1.Error(`${err}`, '409');
+    if (context.role !== _models_1.UserRoleEnum.ADMIN)
+        throw new _config_1.Error("use don't have permission", '400');
+    const _product = await _models_1.ProductModel.findById(id).populate('category');
+    Object.keys(product).forEach((key) => {
+        //@ts-ignore
+        if (product[key]) {
+            //@ts-ignore
+            _product[key] = product[key];
+        }
     });
-    return response;
+    _product?.save();
+    const newProduct = await _models_1.ProductModel.findById(id).populate('category');
+    return newProduct;
 };
 exports.updateProduct = updateProduct;
 //# sourceMappingURL=updateProduct.js.map

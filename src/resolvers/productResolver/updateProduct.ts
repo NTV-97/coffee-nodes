@@ -1,6 +1,5 @@
-import { ProductModel, IProduct } from '@models';
+import { ProductModel, IProduct, UserRoleEnum } from '@models';
 import { Error } from '@config';
-import { removeEmptyObject } from '@utils';
 import { Types } from 'mongoose';
 import { Context } from '@types';
 
@@ -10,10 +9,18 @@ export const updateProduct = async (
   context: Context,
 ) => {
   if (!context.userId) throw new Error('unauthorized', '401');
-  const data = removeEmptyObject(product);
-  const response = await ProductModel.findByIdAndUpdate(id, data, { upsert: true }, (err) => {
-    if (err) throw new Error(`${err}`, '409');
+  if (context.role !== UserRoleEnum.ADMIN) throw new Error("use don't have permission", '400');
+  const _product = await ProductModel.findById(id).populate('category');
+  Object.keys(product).forEach((key) => {
+    //@ts-ignore
+    if (product[key]) {
+      //@ts-ignore
+      _product[key] = product[key];
+    }
   });
 
-  return response;
+  _product?.save();
+  const newProduct = await ProductModel.findById(id).populate('category');
+
+  return newProduct;
 };

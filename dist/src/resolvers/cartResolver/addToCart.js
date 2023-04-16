@@ -78,7 +78,15 @@ const addToCart = async (_, { items }, context) => {
         }
     }
     await cart.save();
-    return cart;
+    const newCart = await _models_1.CartModel.findById(cart.id)
+        .populate({
+        path: 'items.product',
+        populate: {
+            path: 'category',
+        },
+    })
+        .populate('user');
+    return newCart;
 };
 exports.addToCart = addToCart;
 //# sourceMappingURL=addToCart.js.map

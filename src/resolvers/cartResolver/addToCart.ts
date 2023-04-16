@@ -105,6 +105,14 @@ export const addToCart = async (
   }
 
   await cart.save();
+  const newCart = await CartModel.findById(cart.id)
+    .populate({
+      path: 'items.product',
+      populate: {
+        path: 'category',
+      },
+    })
+    .populate('user');
 
-  return cart;
+  return newCart;
 };
