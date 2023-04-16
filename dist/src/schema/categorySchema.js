@@ -17,6 +17,10 @@ exports.categorySchema = (0, apollo_server_express_1.gql) `
     image: String
     description: String
   }
+  type Success {
+    message: String!
+    success: Boolean!
+  }
   extend type Query {
     getCategory(id: ID!): Category
     getCategories: [Category!]!
@@ -24,7 +28,7 @@ exports.categorySchema = (0, apollo_server_express_1.gql) `
   extend type Mutation {
     createCategory(category: CategoryInput!): Category!
     updateCategory(id: ID!, category: CategoryInput!): Category!
-    deleteCategory(id: ID!): Category!
+    deleteCategory(id: ID!): Success!
   }
 `;
 //# sourceMappingURL=categorySchema.js.map

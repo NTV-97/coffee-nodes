@@ -18,8 +18,8 @@ class Auth {
     static async matchPasswords(requestPwd, userPwd) {
         return bcrypt_1.default.compare(requestPwd, userPwd);
     }
-    static generateJwt({ email, userId }) {
-        return jsonwebtoken_1.default.sign({ userId, email }, SECRET_KEY, {
+    static generateJwt({ role, userId }) {
+        return jsonwebtoken_1.default.sign({ userId, role }, SECRET_KEY, {
             expiresIn: '1 days',
         });
     }
@@ -35,8 +35,8 @@ class Auth {
                     return null;
                 }
                 //@ts-ignore
-                const { userId } = this.getJwtPayload(token);
-                return userId;
+                const { userId, role } = this.getJwtPayload(token);
+                return { userId, role };
             }
         }
         return null;

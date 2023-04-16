@@ -1,12 +1,17 @@
 import { gql } from 'apollo-server-express';
 
 export const userSchema = gql`
+  enum UserRole {
+    ADMIN
+    USER
+  }
   type User {
     id: ID!
     name: String
     phoneNumber: String!
     address: String
     email: String!
+    role: UserRole!
   }
   type Success {
     message: String!

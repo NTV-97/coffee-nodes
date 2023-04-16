@@ -1,12 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.cancelOrder = void 0;
+exports.getAllOrders = void 0;
 const _models_1 = require("@models");
 const _config_1 = require("@config");
-const cancelOrder = async (_, { id }, context) => {
+const getAllOrders = async (_, __, context) => {
     if (!context.userId)
         throw new _config_1.Error('unauthorized', '401');
-    const order = await _models_1.OrderModel.findById(id)
+    const order = await _models_1.OrderModel.find()
         .populate({
         path: 'items.product',
         populate: {
@@ -14,11 +14,7 @@ const cancelOrder = async (_, { id }, context) => {
         },
     })
         .populate('user');
-    if (order) {
-        order.status = _models_1.OrderStatus.CANCELLED;
-        await order.save();
-    }
     return order;
 };
-exports.cancelOrder = cancelOrder;
-//# sourceMappingURL=cancelOrder.js.map
+exports.getAllOrders = getAllOrders;
+//# sourceMappingURL=getAllOrders.js.map

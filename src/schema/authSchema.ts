@@ -1,5 +1,4 @@
 import { gql } from 'apollo-server-express';
-import { userSchema } from './userSchema';
 
 export const authSchema = gql`
   type Login {
@@ -12,10 +11,10 @@ export const authSchema = gql`
     address: String
     email: String!
     password: String!
+    role: UserRole!
   }
   extend type Mutation {
     signup(registerInput: RegisterInput): Login!
     login(email: String, phoneNumber: String, password: String!): Login!
   }
-  ${userSchema}
 `;

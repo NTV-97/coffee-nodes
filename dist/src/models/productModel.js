@@ -20,6 +20,7 @@ const productSchema = new mongoose_1.Schema({
                 },
             ],
             required: true,
+            _id: false,
         },
         topping: {
             type: [
@@ -29,6 +30,7 @@ const productSchema = new mongoose_1.Schema({
                 },
             ],
             required: true,
+            _id: false,
         },
     },
     image: {

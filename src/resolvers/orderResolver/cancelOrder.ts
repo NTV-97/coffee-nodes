@@ -1,4 +1,4 @@
-import { OrderModel } from '@models';
+import { OrderModel, OrderStatus } from '@models';
 import { Context } from '@types';
 import { Error } from '@config';
 import { Types } from 'mongoose';
@@ -15,7 +15,7 @@ export const cancelOrder = async (_: any, { id }: { id: Types.ObjectId }, contex
     })
     .populate('user');
   if (order) {
-    order.status = 'CANCELLED';
+    order.status = OrderStatus.CANCELLED;
     await order.save();
   }
 

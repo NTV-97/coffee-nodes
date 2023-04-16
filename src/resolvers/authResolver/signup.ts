@@ -3,7 +3,7 @@ import { Auth } from '@services';
 import { Error } from '@config';
 
 export const signup = async (_: any, { registerInput }: { registerInput: IUser }) => {
-  const { email, password, phoneNumber, name, address } = registerInput;
+  const { email, password, phoneNumber, name, address, role } = registerInput;
   try {
     const userExists = await UserModel.findOne({
       $or: [{ email }, { phoneNumber }],
@@ -18,13 +18,20 @@ export const signup = async (_: any, { registerInput }: { registerInput: IUser }
       }
     }
     const hashedPwd = await Auth.hashPassword(password);
-    const user: IUser = new UserModel({ email, password: hashedPwd, phoneNumber, name, address });
+    const user: IUser = new UserModel({
+      email,
+      password: hashedPwd,
+      phoneNumber,
+      name,
+      address,
+      role,
+    });
     await user.save();
     return {
       message: 'success',
       token: Auth.generateJwt({
         userId: user.id,
-        email: user.email,
+        role: user.role,
       }),
     };
   } catch (error) {

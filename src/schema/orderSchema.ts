@@ -26,14 +26,21 @@ export const orderSchema = gql`
     updatedAt: Date
   }
 
+  type Success {
+    message: String!
+    success: Boolean!
+  }
+
   extend type Query {
     getOrders: [Order!]!
     getOrder(id: ID!): Order
+    getAllOrders: [Order!]!
   }
 
   extend type Mutation {
     placeOrder(idCart: ID!, note: String): Order
     updateOrderStatus(id: ID!, status: OrderStatus!): Order
     cancelOrder(id: ID!): Order
+    deleteAllOrders: Success
   }
 `;

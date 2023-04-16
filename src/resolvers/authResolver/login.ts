@@ -34,7 +34,7 @@ export const login = async (_: any, { email, password, phoneNumber }: IUser) => 
     message: 'success',
     token: Auth.generateJwt({
       userId: user.id,
-      email: user.email,
+      role: user.role,
     }),
   };
 };

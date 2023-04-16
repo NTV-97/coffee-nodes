@@ -1,7 +1,14 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.OrderModel = void 0;
+exports.OrderModel = exports.OrderStatus = void 0;
 const mongoose_1 = require("mongoose");
+var OrderStatus;
+(function (OrderStatus) {
+    OrderStatus["PENDING"] = "PENDING";
+    OrderStatus["PROCESSING"] = "PROCESSING";
+    OrderStatus["COMPLETED"] = "COMPLETED";
+    OrderStatus["CANCELLED"] = "CANCELLED";
+})(OrderStatus = exports.OrderStatus || (exports.OrderStatus = {}));
 const orderItemSchema = new mongoose_1.Schema({
     product: { type: mongoose_1.Schema.Types.ObjectId, ref: 'Product', required: true },
     quantity: { type: Number, required: true },

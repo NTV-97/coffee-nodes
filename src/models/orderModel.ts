@@ -2,6 +2,12 @@ import { Model, Document, Types, Schema, model } from 'mongoose';
 import { IProduct } from './productModel';
 import { IUser } from './userModel';
 
+export enum OrderStatus {
+  PENDING = 'PENDING',
+  PROCESSING = 'PROCESSING',
+  COMPLETED = 'COMPLETED',
+  CANCELLED = 'CANCELLED',
+}
 export type OrderItemType = {
   product: IProduct | Types.ObjectId;
   quantity: number;
@@ -15,7 +21,7 @@ export interface IOrder extends Document {
   user: Types.ObjectId | IUser;
   items: OrderItemType[];
   totalPrice: number;
-  status: string;
+  status: OrderStatus;
   note: string;
   createdAt: Date;
   updatedAt: Date;

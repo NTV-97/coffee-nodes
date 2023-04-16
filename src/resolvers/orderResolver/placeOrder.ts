@@ -1,4 +1,4 @@
-import { CartModel, IOrder, OrderModel } from '@models';
+import { CartModel, IOrder, OrderModel, OrderStatus } from '@models';
 import { Context } from '@types';
 import { Error } from '@config';
 import { Types } from 'mongoose';
@@ -22,7 +22,7 @@ export const placeOrder = async (
     user: cart?.user,
     items: cart?.items,
     totalPrice: cart?.totalPrice,
-    status: 'PROCESSING',
+    status: OrderStatus.PENDING,
     note,
   };
   const newOrder = new OrderModel(order);

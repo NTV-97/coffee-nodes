@@ -5,7 +5,7 @@ const _models_1 = require("@models");
 const _services_1 = require("@services");
 const _config_1 = require("@config");
 const signup = async (_, { registerInput }) => {
-    const { email, password, phoneNumber, name, address } = registerInput;
+    const { email, password, phoneNumber, name, address, role } = registerInput;
     try {
         const userExists = await _models_1.UserModel.findOne({
             $or: [{ email }, { phoneNumber }],
@@ -19,13 +19,20 @@ const signup = async (_, { registerInput }) => {
             }
         }
         const hashedPwd = await _services_1.Auth.hashPassword(password);
-        const user = new _models_1.UserModel({ email, password: hashedPwd, phoneNumber, name, address });
+        const user = new _models_1.UserModel({
+            email,
+            password: hashedPwd,
+            phoneNumber,
+            name,
+            address,
+            role,
+        });
         await user.save();
         return {
             message: 'success',
             token: _services_1.Auth.generateJwt({
                 userId: user.id,
-                email: user.email,
+                role: user.role,
             }),
         };
     }

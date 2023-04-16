@@ -7,6 +7,8 @@ const createCategory = async (_, { category }, context) => {
     try {
         if (!context.userId)
             throw new _config_1.Error('unauthorized', '401');
+        if (context.role !== _models_1.UserRoleEnum.ADMIN)
+            throw new _config_1.Error("use don't have permission", '400');
         const newCategory = new _models_1.CategoryModel(category);
         return await newCategory.save();
     }

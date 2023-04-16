@@ -39,6 +39,7 @@ const productSchema = new Schema<IProduct>(
           },
         ],
         required: true,
+        _id: false,
       },
       topping: {
         type: [
@@ -48,6 +49,7 @@ const productSchema = new Schema<IProduct>(
           },
         ],
         required: true,
+        _id: false,
       },
     },
     image: {
